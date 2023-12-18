@@ -15,7 +15,6 @@ while True:
     opcao = input(menu)
 
     if opcao == "1":
-        try:
             valor_deposito = float(input("Qual o valor que o usuário deseja depositar?: "))
             if valor_deposito > 0:
                 Saldo += valor_deposito
@@ -23,12 +22,9 @@ while True:
                 print(f"Depósito de R${valor_deposito} realizado com sucesso. Novo saldo: R${Saldo}")
             else:
                 print("Por favor, insira um valor válido para depósito.")
-        except ValueError:
-            print("Por favor, insira um valor numérico para depósito.")
 
     if opcao == "2":
         if numero_saques < LIMITE_SAQUES:
-            try:
                 valor_saque = float(input("Qual o valor que o usuário deseja sacar?: "))
                 if valor_saque > 0:
                     if valor_saque <= Saldo:
@@ -40,8 +36,6 @@ while True:
                         print("Saldo insuficiente. Por favor, insira um valor menor.")
                 else:
                     print("Por favor, insira um número válido para saque.")
-            except ValueError:
-                print("Por favor, insira um valor numérico para saque.")
         else:
             print("Limite de saques atingido. Não é possível realizar mais saques.")
 
