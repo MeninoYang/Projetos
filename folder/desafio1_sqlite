@@ -1,0 +1,70 @@
+from sqlalchemy import Column, create_engine, select, func, Integer, String, ForeignKey, Float
+from sqlalchemy.orm import declarative_base, Session, relationship
+
+Base = declarative_base()
+
+class Cliente(Base):
+    __tablename__ = "Cliente"
+    id = Column(Integer, primary_key=True)
+    nome = Column(String)
+    cpf = Column(String(11))
+    endereco = Column(String)
+
+    Conta = relationship("Conta", back_populates="Cliente")
+
+    def __repr__(self):
+        return f"Cliente(id={self.id}, nome={self.nome}, cpf={self.cpf}, endereco={self.endereco})"
+
+class Conta(Base):
+    __tablename__ = "Conta"
+    id = Column(Integer, primary_key=True)
+    num = Column(Integer)
+    id_Cliente = Column(Integer, ForeignKey('Cliente.id'))
+    saldo = Column(Float)
+
+    Cliente = relationship("Cliente", back_populates="Conta")
+
+    def __repr__(self):
+        return f"Conta(id={self.id}, num={self.num}, id_Cliente={self.id_Cliente}, saldo={self.saldo}, tipo_conta={self.tipo_conta}, agencia={self.agencia})"
+
+print(Conta.__tablename__)
+print(Cliente.__tablename__)
+
+engine = create_engine("sqlite://")
+
+Base.metadata.create_all(engine)
+
+with Session(engine) as sessao:
+    julio = Cliente(
+        id=1,  # Changed to integer ID
+        nome='julio',
+        cpf='50965743809',
+        endereco='rua joaquim dos santos',
+    )
+
+    bob = Cliente(
+        id=2,  # Changed to integer ID
+        nome='bob',
+        cpf='12678940522',
+        endereco='rua parque das nações',
+    )
+
+    conta_julio = Conta(
+        num=1,
+        saldo=2000.00,
+        Cliente=julio
+    )
+
+    conta_bob = Conta(
+        num=2,
+        saldo=1500.00,
+        Cliente=bob
+    )
+
+    sessao.add_all([julio, bob, conta_julio, conta_bob])
+    sessao.commit()
+
+stmt_Cliente = select(Cliente).where(Cliente.nome.in_(["julio", 'bob']))
+print("\nRecuperando usuários com base em uma condição de filtragem")
+for cliente in sessao.execute(stmt_Cliente):
+    print(cliente)
