@@ -1,0 +1,98 @@
+import pprint
+from datetime import datetime
+import pymongo as pyM
+from sqlalchemy import Column, create_engine, select, Integer, String, ForeignKey, Float
+from sqlalchemy.orm import declarative_base, Session, relationship
+
+Base = declarative_base()
+
+class Cliente(Base):
+    __tablename__ = "Cliente"
+    id = Column(Integer, primary_key=True)
+    nome = Column(String)
+    cpf = Column(String(11))
+    endereco = Column(String)
+
+    Conta = relationship("Conta", back_populates="Cliente")
+
+    def __repr__(self):
+        return f"Cliente(id={self.id}, nome={self.nome}, cpf={self.cpf}, endereco={self.endereco})"
+
+class Conta(Base):
+    __tablename__ = "Conta"
+    id = Column(Integer, primary_key=True)
+    num = Column(Integer)
+    id_Cliente = Column(Integer, ForeignKey('Cliente.id'))
+    saldo = Column(Float)
+
+    Cliente = relationship("Cliente", back_populates="Conta")
+
+    def __repr__(self):
+        return f"Conta(id={self.id}, num={self.num}, id_Cliente={self.id_Cliente}, saldo={self.saldo})"
+
+engine = create_engine("sqlite:///:memory:")  # Usei um banco de dados em memória para simplificar o exemplo
+Base.metadata.create_all(engine)
+
+with Session(engine) as sessao:
+    julio = Cliente(
+        nome='julio',
+        cpf='50965743809',
+        endereco='rua joaquim dos santos',
+    )
+
+    bob = Cliente(
+        nome='bob',
+        cpf='12678940522',
+        endereco='rua parque das nações',
+    )
+
+    conta_julio = Conta(
+        num=1,
+        saldo=2000.00,
+        Cliente=julio
+    )
+
+    conta_bob = Conta(
+        num=2,
+        saldo=1500.00,
+        Cliente=bob
+    )
+
+    sessao.add_all([julio, bob, conta_julio, conta_bob])
+    sessao.commit()
+
+client = pyM.MongoClient('mongodb+srv://Yang:AljG0abNiPJ8ijpe@testing.lwmfas6.mongodb.net/?retryWrites=true&w=majority')
+db = client.test
+collection = db.test_collection
+
+new_posts = [
+    {
+        "author": "bob",
+        "text": "Salve",
+        "tags": ["python", "javascript", "mongodb"],
+        "date": datetime.utcnow(),
+        "cliente_info": {
+            "cpf": "12678940522",
+            "address": "rua do chaves 334",
+            "conta": "tipo salário",
+            "saldo": 2000.00
+        }
+    },
+    {
+        "author": "shrek",
+        "text": "Hey now, you're a rockstar",
+        "title": "quero pular de um prédio",
+        "date": datetime.utcnow(),
+        "cliente_info": {
+            "cpf": "26345489028",
+            "address": "rua do seu barriga 999",
+            "conta": "tipo corrente",
+            "saldo": 5000.00
+        }
+    },
+]
+
+result = collection.insert_many(new_posts)
+print(result.inserted_ids)
+
+pprint.pprint(collection.find_one())
