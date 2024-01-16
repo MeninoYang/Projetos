@@ -1,0 +1,50 @@
+import pprint
+from datetime import datetime
+import pymongo as pyM
+
+client = pyM.MongoClient('mongodb+srv://Yang:AljG0abNiPJ8ijpe@testing.lwmfas6.mongodb.net/?retryWrites=true&w=majority')
+
+db = client.test
+collection = db.test_collection  # Alteração do nome da coleção
+
+post = {
+    "author": "Julio",
+    "text": "Hello World!",
+    "tags": ["python", "javascript", "mongodb"],
+    "date": datetime.utcnow(),
+}
+
+post_id = collection.insert_one(post).inserted_id
+print(post_id)
+
+print(collection.find_one({"author": "Julio"}))
+
+pprint.pprint(collection.find_one({"author": "Julio"}))
+
+new_posts = [
+    {
+        "author": "bob",
+        "text": "Salve",
+        "tags": ["python", "javascript", "mongodb"],
+        "date": datetime.utcnow(),
+        "cpf": "1234567890",
+        "address": "rua do chaves 334",
+        "conta": "tipo salário",
+        "saldo": "R$ 2000"
+    },
+    {
+        "author": "shrek",
+        "text": "Hey now, you're a rockstar",
+        "title": "quero pular de um prédio",
+        "date": datetime.utcnow(),
+        "cpf": "26345489028",
+        "address": "rua do seu barriga 999",
+        "conta": "tipo corrente",
+        "saldo": "R$ 5000"
+    },
+]
+
+result = collection.insert_many(new_posts)
+print(result.inserted_ids)
+
+pprint.pprint(collection.find_one({"author": "bob"}))
