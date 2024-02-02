@@ -1,0 +1,61 @@
+import pandas as pd
+from flask_ngrok import run_with_ngrok
+from flask import Flask, jsonify, request
+import random as r
+
+app = Flask(__name__)
+run_with_ngrok(app)
+
+a = {
+    "Number": 1,
+    "name": "Mahesh",
+    "age": 25,
+    "city": "Bangalore",
+    "country": "India"
+}
+
+b = {
+    "Number": 2,
+    "name": "Alex",
+    "age": 26,
+    "city": "London",
+    "Country": "UK"
+}
+
+c = {
+    "Number": 3,
+    "name": "David",
+    "age": 27,
+    "city": "San Francisco",
+    "Country": "USA"
+}
+
+d = {
+    "Number": 4, 
+    "name": "john",
+    "age": 28,
+    "city": "Toronto",
+    "Country": "Canada"
+}
+
+e = {
+    "Number": 5,
+    "name": "Chris",
+    "age": 29,
+    "city": "Paris",
+    "Country": "France"
+}
+
+@app.route("/https://2993-2804-14c-bf2a-80ae-3de7-784a-b4f5-7734.ngrok-free.app")
+def input():
+    return jsonify([a])
+
+@app.route('/https://2993-2804-14c-bf2a-80ae-3de7-784a-b4f5-7734.ngrok-free.app', methods=['GET','POST'])
+
+def predjson():
+  pred = r.choice(["positive","negative"])
+  nd = a
+  nd["prediction"]=pred
+  return jsonify(nd)
+
+app.run()
