@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: Graficos
+Version: 0.0.1
+Summary: uns bagui de grafico ai, muito zika
+Home-page: 
+Author: Julio
+Author-email: julio.humanes123@gmail.com
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib
+
+# Graficos
+
+Description.
+The package Graficos is used to:
+    basic plotting functionalities using Matplotlib.
+
+## Installation
+Use the package manager pip to install Graficos
+
+
+## Usage
+
+from graficos import plotagem
+file1_name.my_function()
+
+## Author
+Yang
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
