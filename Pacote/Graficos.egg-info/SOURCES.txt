@@ -1,9 +1,0 @@
-README.md
-setup.py
-Graficos/__init__.py
-Graficos/plotagem.py
-Graficos.egg-info/PKG-INFO
-Graficos.egg-info/SOURCES.txt
-Graficos.egg-info/dependency_links.txt
-Graficos.egg-info/requires.txt
-Graficos.egg-info/top_level.txt
