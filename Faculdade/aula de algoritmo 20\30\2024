@@ -1,0 +1,37 @@
+1)
+int main(){
+	int media,total,num1,num2;
+	printf("digite o valor 1:");
+	scanf("%d", &num1);
+	printf("digite o valor 2: ");
+	scanf("%d", &num2);
+	total = num1 + num2;
+	media = total/2;
+	printf("o valor total dos dois valores e: %d",total);
+	printf("\no valor da media dos dois numeros e: %d",media);
+	return 0;
+}
+
+2)
+int main(){
+	int num1,num2,quadrado;
+	printf("digite o numero da base: ");
+	scanf("%d", &num1);
+	printf("digite o numero da altura: ");
+	scanf("%d", &num2);
+	quadrado = num1*num2/2;
+	printf("a area do quadrado e: %d",quadrado);
+	return 0;
+}
+
+
+
+3)
+int main(){
+	int idade,ano;
+	printf("digite a sua idade:");
+	scanf("%d", &idade);
+	ano = 2024-idade;
+	printf("voce nasceu no ano de: %d",ano);
+	return 0;
+}
