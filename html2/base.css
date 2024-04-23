@@ -1,0 +1,124 @@
+html, body {
+    margin: 0;
+}
+body {
+    background: linear-gradient(to bottom, rgb(24, 27, 27), rgb(78, 87, 87));
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    width: 1500px;
+    display: flex;
+    margin: 0 auto;
+    background-color: rgb(24, 27, 27);
+}
+.main {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+.menu {
+    width: 15%;
+    background-color: rgb(24, 27, 27);
+    padding: 10px 20px 0px;
+    border-right: 5px solid white;
+}
+.header {
+    border-bottom: 5px solid white;
+    display: flex; 
+    align-items: center; 
+    background-color: rgb(24, 27, 27);
+    min-height: 150px;
+}
+.header img {
+    position: relative;
+    left: 400px;
+    width: 380px;
+}
+.content {
+    border-bottom: 5px solid white;
+    background-color: rgb(24, 27, 27);
+    min-height: 300px;
+    padding: 20px;
+}
+.content h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    color: white;
+}
+.content-taba {
+    position: relative;
+}
+.footer {
+    background-color: rgb(24, 27, 27);
+    height: 400px;
+    display: flex;
+    position: relative;
+}
+.footer-img1 {
+    position: relative;
+    top: 160px;
+    left: 25px;
+    height: 50px;
+}
+.footer-img2 {
+    position: relative;
+    top: 220px;
+    right: 100px;
+    height: 46px;
+}
+.footer-img3 {
+    position: relative;
+    top: 217px;
+    right: 95px;
+    height: 50px;
+}
+.footer-txt {
+    color: white;
+    position: relative;
+    top: 5px;
+    left: 40px;
+}
+.footer-mapa {
+    position: relative;
+    top: 70px;
+    right: 210px;
+    height: 300px;
+}
+.footer-func {
+    position: relative;
+    right: 130px;
+    top: 80px;
+}
+.footer-item {
+    position: relative;
+    top: 130px;
+    right: 315px;
+}
+.footer-liga {
+    position: relative;
+    top: 80px;
+    right: 150px;
+}
+.footer-num {
+    position: relative;
+    top: 130px;
+    right: 250px;
+}
+.playfair-display-texto {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+.noto-sans-p1 {
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 87.5;   
+}
